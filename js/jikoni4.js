@@ -1,9 +1,9 @@
 const appliances = [
-    { id: "blender", match: "blender", img: "img/Jikoni/blender.jpg" },
-    { id: "cooker", match: "cooker", img: "img/Jikoni/cooker.jpg" },
-    { id: "microwave", match: "microwave", img: "img/Jikoni/microwave.jpg" },
-    { id: "fridge", match: "fridge", img: "img/Jikoni/fridge.jpg" },
-    { id: "kettle", match: "kettle", img: "img/Jikoni/kettle.jpg" },
+    { id: "table", match: "table", img: "img/table.png" },
+    { id: "carpet", match: "carpet", img: "img/carpet.png" },
+    { id: "telephone", match: "telephone", img: "img/telephone.png" },
+    { id: "television", match: "television", img: "img/television.png" },
+    { id: "radio", match: "radio", img: "img/radio.png" },
 ];
 
 // Shuffle appliances
@@ -148,7 +148,7 @@ function checkCompletion() {
         document.querySelector('.completion-message').style.display = 'block';
         // Redirect to the next page after a short delay
         setTimeout(() => {
-            window.location.href = 'jikoni2.html'; // Change to your next page URL
+            window.location.href = 'majengo.html'; // Change to your next page URL
         }, 2000); // 2000 milliseconds = 2 seconds
     }
 }
