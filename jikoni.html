@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vifaa/Appliances</title>
+    <link rel="stylesheet" href="css/jikoni3.css">
+
+
+    <!-- jQuery and jQuery UI CDN Links -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+
+<body>
+    <h2> LESSON 15:</h2>
+
+    <h2> Vifaa vya jikoni/Kitchen Appliances</h2>
+
+    <div class="introduction">
+        <p>Welcome to the Drag and Drop activity! Your task is to match the kitchen appliances with their respective
+            Kiswahili names. Have fun!</p>
+    </div>
+
+    <section class="draggable-elements" id="draggable-container">
+        <div class="draggable" id="blender" data-match="blender"><img src="img/Jikoni/blender.jpg" alt="Blender"></div>
+        <div class="draggable" id="cooker" data-match="cooker"><img src="img/Jikoni/cooker.jpg" alt="Cooker"></div>
+        <div class="draggable" id="microwave" data-match="microwave"><img src="img/Jikoni/microwave.jpg" alt="Microwave">
+        </div>
+        <div class="draggable" id="fridge" data-match="fridge"><img src="img/Jikoni/fridge.jpg" alt="Fridge"></div>
+        <div class="draggable" id="kettle" data-match="kettle"><img src="img/Jikoni/kettle.jpg" alt="Kettle"></div>
+    </section>
+
+    <section class="droppable-elements" style="display: flex; justify-content: center;">
+        <div class="droppable" data-match="blender">
+            <span>Blenda</span>
+        </div>
+        <div class="droppable" data-match="cooker">
+            <span>Jiko la gesi</span>
+        </div>
+        <div class="droppable" data-match="microwave">
+            <span>Choko</span>
+        </div>
+        <div class="droppable" data-match="fridge">
+            <span>Jokofu</span>
+        </div>
+        <div class="droppable" data-match="kettle">
+            <span>Birika</span>
+        </div>
+    </section>
+
+    <div class="completion-message">Congratulations! You've matched all the kitchen appliances!</div>
+
+    <script src="js/jikoni4.js"></script>
+</body>
+
+</html>

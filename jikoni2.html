@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vyombo/Utensils</title>
+    <link rel="stylesheet" href="css/jikoni3.css">
+
+    <!-- jQuery and jQuery UI CDN Links -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+
+<body>
+    <h2> LESSON 15:</h2>
+
+    <h2>Vyombo vya jikoni/Kitchen Utensils </h2>
+
+    <div class="introduction">
+        <p>Welcome to the Drag and Drop activity! Your task is to match the kitchen utensils with their respective
+            Kiswahili names. Have fun!</p>
+    </div>
+
+    <section class="draggable-elements" id="draggable-container">
+        <div class="draggable" id="bowl" data-match="bowl"><img src="img/Jikoni/bowl.jpg" alt="Bowl"></div>
+        <div class="draggable" id="knife" data-match="knife"><img src="img/Jikoni/knife.jpg" alt="Knife"></div>
+        <div class="draggable" id="pan" data-match="pan"><img src="img/Jikoni/pan.jpg" alt="Pan"></div>
+        <div class="draggable" id="pot" data-match="pot"><img src="img/Jikoni/pot.jpg" alt="Pot"></div>
+        <div class="draggable" id="spoon" data-match="spoon"><img src="img/Jikoni/spoon.png" alt="Spoon"></div>
+    </section>
+
+    <section class="droppable-elements" style="display: flex; justify-content: center;">
+        <div class="droppable" data-match="bowl">
+            <span>Bakuli</span>
+        </div>
+        <div class="droppable" data-match="knife">
+            <span>Kisu</span>
+        </div>
+        <div class="droppable" data-match="pan">
+            <span>Kikaangio</span>
+        </div>
+        <div class="droppable" data-match="pot">
+            <span>Sufuria</span>
+        </div>
+        <div class="droppable" data-match="spoon">
+            <span>Kijiko</span>
+        </div>
+    </section>
+
+    <div class="completion-message">Congratulations! You've matched all the kitchen utensils!</div>
+
+    <script src="js/jikoni3.js"></script>
+
+
+</body>
+
+</html>

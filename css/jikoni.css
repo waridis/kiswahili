@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #7a5e3b, #e5c1a5); /* Shades of brown */
+      color: #111;
+      padding: 1rem; /* Padding for mobile responsiveness */
+    }
+
+    h2 {
+      text-align: center;
+      margin: 2rem 0;
+      font-size: 2.5rem; /* Larger font size */
+      color: #4a3c28; /* Darker shade for contrast */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    }
+
+    .introduction {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+      color: #4a3c28; /* Darker shade for contrast */
+      background-color: rgba(255, 255, 255, 0.8); /* Light background for readability */
+      padding: 1rem;
+      border-radius: 8px; /* Rounded corners */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    }
+
+    .draggable-elements {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap; /* Allow wrapping for small screens */
+      margin: 2rem 0;
+    }
+
+    .draggable {
+      height: 5rem;
+      width: 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0.5rem;
+      cursor: move;
+      position: relative; /* To apply z-index */
+      z-index: 10; /* Ensure dragged image appears on top */
+    }
+
+    .draggable img {
+      width: 100%; /* Adjust to fill the draggable area */
+      height: 100%; /* Adjust to fill the draggable area */
+      border-radius: 5px; /* Optional: rounded corners */
+    }
+
+    .droppable {
+      height: 6.5rem;
+      width: 6.5rem;
+      margin: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: bold;
+      background-color: #d1b89a; /* Light earthy color for the droppable box */
+      border: 3px dashed #4a4a2c; /* Darker border for contrast */
+      position: relative; /* For positioning the dropped image */
+      overflow: hidden; /* Prevent overflow of images */
+    }
+
+    .droppable.dropped {
+      border-style: solid;
+      background-color: #bca78d; /* Slightly darker when dropped */
+    }
+
+    .dragged {
+      opacity: 0.5; /* Make the dragged item semi-transparent */
+    }
+
+    .completion-message {
+      display: none;
+      text-align: center;
+      font-size: 1.5rem;
+      color: green;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      html { font-size: 14px; }
+      .draggable-elements { margin: 1.5rem; }
+      .draggable, .droppable {
+          height: 4rem; /* Reduce height for smaller screens */
+          width: 4rem; /* Reduce width for smaller screens */
+      }
+    }
