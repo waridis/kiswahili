@@ -4,28 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Congratulations</title>
+    <title>Hongera!</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
+            background-color: #f0f8ff;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
         }
     </style>
 </head>
 
 <body>
-    <h1>Congratulations!</h1>
+    <h1>Hongera!</h1>
     <p id="completionMessage"></p>
+    <button onclick="restartQuiz()">Restart Quiz</button>
 
     <script>
-        // Retrieve URL parameters (name and time)
+        // Retrieve URL parameter (name)
         const urlParams = new URLSearchParams(window.location.search);
         const userName = urlParams.get('name');
-        const timeTaken = urlParams.get('time');
 
         // Display completion message
-        document.getElementById('completionMessage').textContent = `${userName}, you completed the quiz in ${timeTaken} seconds.`;
+        document.getElementById('completionMessage').textContent = `${userName}, you have completed the quiz!`;
+
+        // Function to restart the quiz
+        function restartQuiz() {
+            window.location.href = 'index.html'; 
+        }
     </script>
 </body>
 
