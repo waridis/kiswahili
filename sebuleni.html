@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sebuleni/Living Room</title>
+    <link rel="stylesheet" href="css/jikoni3.css">
+
+
+    <!-- jQuery and jQuery UI CDN Links -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+
+<body>
+    <h2> LESSON:</h2>
+
+    <h2> Sebuleni/Living room</h2>
+
+    <div class="introduction">
+        <p>Welcome to the Drag and Drop activity! Your task is to match the living room items with their respective
+            Kiswahili names. Have fun!</p>
+    </div>
+
+    <section class="draggable-elements" id="draggable-container">
+        <div class="draggable" id="blender" data-match="blender"><img src="img/table.png" alt="Table"></div>
+        <div class="draggable" id="carpet" data-match="carpet"><img src="img/carpet.png" alt="Carpet"></div>
+        <div class="draggable" id="microwave" data-match="microwave"><img src="img/telephone.png" alt="Telephone">
+        </div>
+        <div class="draggable" id="fridge" data-match="fridge"><img src="img/radio.png" alt="Radio"></div>
+        <div class="draggable" id="kettle" data-match="kettle"><img src="img/television.png" alt="Television"></div>
+    </section>
+
+    <section class="droppable-elements" style="display: flex; justify-content: center;">
+        <div class="droppable" data-match="table">
+            <span>Meza</span>
+        </div>
+        <div class="droppable" data-match="carpet">
+            <span>Mkeka</span>
+        </div>
+        <div class="droppable" data-match="telephone">
+            <span>Simu</span>
+        </div>
+        <div class="droppable" data-match="radio">
+            <span>Redio</span>
+        </div>
+        <div class="droppable" data-match="television">
+            <span>Runinga</span>
+        </div>
+    </section>
+
+    <div class="completion-message">Congratulations! You've matched all the Living room items!</div>
+
+    <script src="js/jikoni4.js"></script>
+</body>
+
+</html>
