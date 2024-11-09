@@ -1,241 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vifaa/Appliances</title>
-    <link rel="stylesheet" href="css/jikoni3.css">
-
-    <!-- jQuery and jQuery UI CDN Links -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-    <!-- EmailJS Script -->
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-
+    <title>Welcome to the Quiz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            margin-top: 50px;
+            background-color: aqua;
         }
-
-        .draggable {
-            width: 100px;
-            height: 100px;
-            margin: 10px;
-            cursor: move;
-            display: inline-block;
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
         }
-
-        .draggable img {
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
             width: 100%;
-            height: 100%;
+            box-sizing: border-box;
         }
-
-        .droppable {
-            width: 120px;
-            height: 120px;
-            margin: 10px;
-            background: lightgray;
-            display: inline-block;
-            text-align: center;
-            vertical-align: top;
-        }
-
-        .completion-message {
-            display: none;
-            font-size: 20px;
-            color: green;
-        }
-
-        #timer {
-            font-size: 18px;
-            margin-top: 20px;
-        }
-
-        .introduction {
-            margin-bottom: 20px;
-            text-align: center;
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
         }
     </style>
 </head>
-
 <body>
-    <h2> LESSON 15:</h2>
-    <h2> Vifaa vya jikoni/Kitchen Appliances</h2>
 
-    <div class="introduction">
-        <p>Welcome to the Drag and Drop activity! Your task is to match the kitchen appliances with their respective Kiswahili names. Have fun!</p>
+    <div class="container">
+        <h1>Welcome !</h1>
+        <p>Please enter your name below to start the quiz:</p>
+
+        <input type="text" id="userName" placeholder="Enter your name" required>
+        <button onclick="startQuiz()">Start Quiz</button>
+
+        <p id="errorMessage" style="color: red; display: none;">Please enter a valid name to proceed.</p>
     </div>
 
-    <section class="draggable-elements" id="draggable-container">
-        <div class="draggable" id="blender" data-match="blender"><img src="img/Jikoni/blender.jpg" alt="Blender"></div>
-        <div class="draggable" id="cooker" data-match="cooker"><img src="img/Jikoni/cooker.jpg" alt="Cooker"></div>
-        <div class="draggable" id="microwave" data-match="microwave"><img src="img/Jikoni/microwave.jpg" alt="Microwave"></div>
-        <div class="draggable" id="fridge" data-match="fridge"><img src="img/Jikoni/fridge.jpg" alt="Fridge"></div>
-        <div class="draggable" id="kettle" data-match="kettle"><img src="img/Jikoni/kettle.jpg" alt="Kettle"></div>
-    </section>
-
-    <section class="droppable-elements" style="display: flex; justify-content: center; flex-wrap: wrap;">
-        <div class="droppable" data-match="blender">
-            <span>Blenda</span>
-        </div>
-        <div class="droppable" data-match="cooker">
-            <span>Jiko la gesi</span>
-        </div>
-        <div class="droppable" data-match="microwave">
-            <span>Choko</span>
-        </div>
-        <div class="droppable" data-match="fridge">
-            <span>Jokofu</span>
-        </div>
-        <div class="droppable" data-match="kettle">
-            <span>Birika</span>
-        </div>
-    </section>
-
-    <div id="timer">Time: 0 seconds</div>
-
-    <div class="completion-message">Congratulations! You've matched all the kitchen appliances!</div>
-
     <script>
-        // Initialize EmailJS
-        emailjs.init("cskTqgOn0eQs9-_aa"); //  User ID
-
-        let matchedCount = 0;
-        let timerInterval;
-        let startTime = Date.now();
-        let draggedItem = null;
-
-        $(document).ready(function () {
-            // Start timer
-            startTimer();
-
-            // Make elements draggable and droppable
-            $(".draggable").each(function () {
-                setupDragEvents($(this));
-            });
-
-            $(".droppable").droppable({
-                accept: ".draggable",
-                drop: function (event, ui) {
-                    const $draggable = $(ui.draggable);
-                    const targetMatch = $(this).data("match");
-                    const draggableMatch = $draggable.data("match");
-
-                    if (targetMatch === draggableMatch) {
-                        $(this).append($draggable.find("img").clone().css({
-                            width: "100%",
-                            height: "80%",
-                            borderRadius: "5px"
-                        }));
-                        $draggable.remove();
-                        matchedCount++;
-
-                        checkCompletion();
-                    }
-                }
-            });
-        });
-
-        // Set up timer
-        function startTimer() {
-            timerInterval = setInterval(() => {
-                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-                document.getElementById('timer').textContent = `Time: ${elapsedTime} seconds`;
-            }, 1000);
-        }
-
-        // Set up drag events for touch and mouse support
-        function setupDragEvents($element) {
-            $element.on("mousedown touchstart", function (event) {
-                event.preventDefault();
-                draggedItem = $element;
-
-                $(document).on("mousemove touchmove", function (moveEvent) {
-                    moveEvent.preventDefault();
-                    handleDragMove(moveEvent);
-                });
-
-                $(document).on("mouseup touchend", function (endEvent) {
-                    endEvent.preventDefault();
-                    handleDragEnd(endEvent);
-                    $(document).off("mousemove touchmove mouseup touchend");
-                });
-            });
-        }
-
-        // Drag move function to handle element movement
-        function handleDragMove(event) {
-            if (!draggedItem) return;
-
-            const touchEvent = event.type === "touchmove" ? event.originalEvent.touches[0] : event;
-            draggedItem.css({
-                position: "absolute",
-                left: touchEvent.pageX - draggedItem.width() / 2,
-                top: touchEvent.pageY - draggedItem.height() / 2,
-                zIndex: 10
-            });
-        }
-
-        // Drag end function to reset element position if not dropped correctly
-        function handleDragEnd(event) {
-            if (!draggedItem) return;
-
-            const touchEvent = event.type === "touchend" ? event.originalEvent.changedTouches[0] : event;
-
-            const $dropTarget = document.elementFromPoint(touchEvent.clientX, touchEvent.clientY);
-
-            if ($dropTarget && $dropTarget.classList.contains("droppable") &&
-                $dropTarget.getAttribute("data-match") === draggedItem.data("match")) {
-
-                $($dropTarget).append(draggedItem.find("img").clone().css({
-                    width: "100%",
-                    height: "80%",
-                    borderRadius: "5px"
-                }));
-                draggedItem.remove();
-                matchedCount++;
-                checkCompletion();
+        function startQuiz() {
+            const userName = document.getElementById("userName").value.trim();
+            if (userName === "") {
+                document.getElementById("errorMessage").style.display = "block";
             } else {
-                draggedItem.css({ position: "relative", top: "0px", left: "0px", zIndex: 1 });
+                document.getElementById("errorMessage").style.display = "none";
+                // Redirect to the first quiz page with the user's name as a URL parameter
+                window.location.href = `sebuleni.html?name=${userName}`;
             }
-
-            draggedItem = null;
-        }
-
-        // Check for completion
-        function checkCompletion() {
-            if (matchedCount === $(".draggable").length) {
-                clearInterval(timerInterval);
-                const timeTaken = Math.floor((Date.now() - startTime) / 1000);
-                document.querySelector(".completion-message").style.display = "block";
-                sendCompletionEmail(timeTaken);
-
-                setTimeout(() => {
-                    window.location.href = "jikoni2.html";
-                }, 2000);
-            }
-        }
-
-        // Send completion email
-        function sendCompletionEmail(timeTaken) {
-            const templateParams = {
-                time: timeTaken
-            };
-
-            emailjs.send("service_e9e8ufm", "template_p93gbcm", templateParams)
-                .then(response => {
-                    console.log("Email sent successfully:", response);
-                })
-                .catch(error => {
-                    console.error("Error sending email:", error);
-                });
         }
     </script>
 
 </body>
-
 </html>
