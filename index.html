@@ -18,6 +18,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            text-align: center;
         }
 
         .draggable {
@@ -47,12 +48,11 @@
             display: none;
             font-size: 20px;
             color: green;
-            text-align: center;
         }
 
         #timer {
             font-size: 18px;
-            text-align: center;
+            margin-top: 20px;
         }
 
         .introduction {
@@ -68,12 +68,9 @@
 
     <div class="introduction">
         <p>Welcome to the Drag and Drop activity! Your task is to match the kitchen appliances with their respective Kiswahili names. Have fun!</p>
-        <label for="userName">Enter your name to start the quiz:</label>
-        <input type="text" id="userName" placeholder="Your name" />
-        <button onclick="startQuiz()">Start Quiz</button>
     </div>
 
-    <section class="draggable-elements" id="draggable-container" style="display: none;">
+    <section class="draggable-elements" id="draggable-container">
         <div class="draggable" id="blender" data-match="blender"><img src="img/Jikoni/blender.jpg" alt="Blender"></div>
         <div class="draggable" id="cooker" data-match="cooker"><img src="img/Jikoni/cooker.jpg" alt="Cooker"></div>
         <div class="draggable" id="microwave" data-match="microwave"><img src="img/Jikoni/microwave.jpg" alt="Microwave"></div>
@@ -105,153 +102,135 @@
 
     <script>
         // Initialize EmailJS
-        emailjs.init("your_user_id"); // Replace with your EmailJS User ID
-
-        const appliances = [
-            { id: "blender", match: "blender", img: "img/Jikoni/blender.jpg" },
-            { id: "cooker", match: "cooker", img: "img/Jikoni/cooker.jpg" },
-            { id: "microwave", match: "microwave", img: "img/Jikoni/microwave.jpg" },
-            { id: "fridge", match: "fridge", img: "img/Jikoni/fridge.jpg" },
-            { id: "kettle", match: "kettle", img: "img/Jikoni/kettle.jpg" },
-        ];
+        emailjs.init("cskTqgOn0eQs9-_aa"); //  User ID
 
         let matchedCount = 0;
         let timerInterval;
-        let startTime;
-        let userName;
+        let startTime = Date.now();
+        let draggedItem = null;
 
-        // Start the quiz
-        function startQuiz() {
-            userName = document.getElementById('userName').value;
-            if (userName === "") {
-                alert("Please enter your name.");
-                return;
-            }
-            document.querySelector('.introduction').style.display = 'none';
-            document.getElementById('draggable-container').style.display = 'block';
+        $(document).ready(function () {
+            // Start timer
             startTimer();
-            shuffleAppliances();
-            createDraggableElements();
-        }
 
-        // Shuffle appliances
-        function shuffleAppliances() {
-            appliances.sort(() => Math.random() - 0.5);
-        }
-
-        // Populate draggable elements
-        function createDraggableElements() {
-            const draggableContainer = document.getElementById('draggable-container');
-            draggableContainer.innerHTML = '';
-            appliances.forEach(appliance => {
-                const draggableDiv = document.createElement('div');
-                draggableDiv.className = 'draggable';
-                draggableDiv.id = appliance.id;
-                draggableDiv.setAttribute('data-match', appliance.match);
-                draggableDiv.innerHTML = `<img src="${appliance.img}" alt="${appliance.match}">`;
-                draggableContainer.appendChild(draggableDiv);
-            });
-            setupDraggables();
-        }
-
-        // Set up event listeners for drag and drop
-        function setupDraggables() {
-            const draggables = document.querySelectorAll('.draggable');
-            const droppables = document.querySelectorAll('.droppable');
-
-            draggables.forEach(draggable => {
-                draggable.addEventListener('mousedown', handleMouseDown);
+            // Make elements draggable and droppable
+            $(".draggable").each(function () {
+                setupDragEvents($(this));
             });
 
-            function handleMouseDown(e) {
-                e.preventDefault();
-                const target = e.target.closest('.draggable');
-                startDragging(target, e.pageX, e.pageY);
-                document.addEventListener('mousemove', handleMouseMove);
-                document.addEventListener('mouseup', handleMouseUp);
-            }
+            $(".droppable").droppable({
+                accept: ".draggable",
+                drop: function (event, ui) {
+                    const $draggable = $(ui.draggable);
+                    const targetMatch = $(this).data("match");
+                    const draggableMatch = $draggable.data("match");
 
-            function startDragging(target, pageX, pageY) {
-                target.touchOffsetX = pageX - target.getBoundingClientRect().left;
-                target.touchOffsetY = pageY - target.getBoundingClientRect().top;
-                target.style.opacity = '0.5';
-                target.style.zIndex = '10';
-            }
+                    if (targetMatch === draggableMatch) {
+                        $(this).append($draggable.find("img").clone().css({
+                            width: "100%",
+                            height: "80%",
+                            borderRadius: "5px"
+                        }));
+                        $draggable.remove();
+                        matchedCount++;
 
-            function handleMouseMove(e) {
-                const target = document.querySelector('.draggable[style*="z-index: 10"]'); 
-                if (target) {
-                    target.style.position = 'absolute';
-                    target.style.left = `${e.pageX - target.touchOffsetX}px`;
-                    target.style.top = `${e.pageY - target.touchOffsetY}px`;
-                }
-            }
-
-            function handleMouseUp(e) {
-                const draggable = document.querySelector('.draggable[style*="z-index: 10"]');
-                if (draggable) {
-                    draggable.style.opacity = '1';
-                    draggable.style.zIndex = '1';
-                    let dropped = false;
-
-                    droppables.forEach(droppable => {
-                        const rect = droppable.getBoundingClientRect();
-                        if (e.pageX >= rect.left && e.pageX <= rect.right && e.pageY >= rect.top && e.pageY <= rect.bottom) {
-                            if (draggable.dataset.match === droppable.dataset.match) {
-                                dropped = true;
-                                droppable.classList.add('dropped');
-                                droppable.innerHTML = `<img src="${draggable.querySelector('img').src}" style="width: 100%; height: 80%; border-radius: 5px;"/><div>${droppable.innerHTML}</div>`;
-                                draggable.remove();
-                                matchedCount++;
-                                checkCompletion();
-                            }
-                        }
-                    });
-
-                    if (!dropped) {
-                        draggable.style.position = 'static'; 
+                        checkCompletion();
                     }
-
-                    document.removeEventListener('mousemove', handleMouseMove);
-                    document.removeEventListener('mouseup', handleMouseUp);
                 }
-            }
-        }
+            });
+        });
 
-        // Timer functionality
+        // Set up timer
         function startTimer() {
-            startTime = Date.now();
             timerInterval = setInterval(() => {
                 const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
                 document.getElementById('timer').textContent = `Time: ${elapsedTime} seconds`;
             }, 1000);
         }
 
-        // Check completion and send email
+        // Set up drag events for touch and mouse support
+        function setupDragEvents($element) {
+            $element.on("mousedown touchstart", function (event) {
+                event.preventDefault();
+                draggedItem = $element;
+
+                $(document).on("mousemove touchmove", function (moveEvent) {
+                    moveEvent.preventDefault();
+                    handleDragMove(moveEvent);
+                });
+
+                $(document).on("mouseup touchend", function (endEvent) {
+                    endEvent.preventDefault();
+                    handleDragEnd(endEvent);
+                    $(document).off("mousemove touchmove mouseup touchend");
+                });
+            });
+        }
+
+        // Drag move function to handle element movement
+        function handleDragMove(event) {
+            if (!draggedItem) return;
+
+            const touchEvent = event.type === "touchmove" ? event.originalEvent.touches[0] : event;
+            draggedItem.css({
+                position: "absolute",
+                left: touchEvent.pageX - draggedItem.width() / 2,
+                top: touchEvent.pageY - draggedItem.height() / 2,
+                zIndex: 10
+            });
+        }
+
+        // Drag end function to reset element position if not dropped correctly
+        function handleDragEnd(event) {
+            if (!draggedItem) return;
+
+            const touchEvent = event.type === "touchend" ? event.originalEvent.changedTouches[0] : event;
+
+            const $dropTarget = document.elementFromPoint(touchEvent.clientX, touchEvent.clientY);
+
+            if ($dropTarget && $dropTarget.classList.contains("droppable") &&
+                $dropTarget.getAttribute("data-match") === draggedItem.data("match")) {
+
+                $($dropTarget).append(draggedItem.find("img").clone().css({
+                    width: "100%",
+                    height: "80%",
+                    borderRadius: "5px"
+                }));
+                draggedItem.remove();
+                matchedCount++;
+                checkCompletion();
+            } else {
+                draggedItem.css({ position: "relative", top: "0px", left: "0px", zIndex: 1 });
+            }
+
+            draggedItem = null;
+        }
+
+        // Check for completion
         function checkCompletion() {
-            if (matchedCount === appliances.length) {
+            if (matchedCount === $(".draggable").length) {
                 clearInterval(timerInterval);
-                document.querySelector('.completion-message').style.display = 'block';
-                const timeTaken = Math.floor((Date.now() - startTime) / 1000); // Get time taken in seconds
-                sendCompletionEmail(userName, timeTaken);
+                const timeTaken = Math.floor((Date.now() - startTime) / 1000);
+                document.querySelector(".completion-message").style.display = "block";
+                sendCompletionEmail(timeTaken);
+
                 setTimeout(() => {
-                    window.location.href = 'jikoni2.html'; // Redirect after completion
+                    window.location.href = "jikoni2.html";
                 }, 2000);
             }
         }
 
-        // Send email using EmailJS
-        function sendCompletionEmail(name, timeTaken) {
+        // Send completion email
+        function sendCompletionEmail(timeTaken) {
             const templateParams = {
-                name: name,
                 time: timeTaken
             };
 
-            emailjs.send("your_service_id", "your_template_id", templateParams)
-                .then((response) => {
+            emailjs.send("service_e9e8ufm", "template_p93gbcm", templateParams)
+                .then(response => {
                     console.log("Email sent successfully:", response);
                 })
-                .catch((error) => {
+                .catch(error => {
                     console.error("Error sending email:", error);
                 });
         }
