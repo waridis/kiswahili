@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Congratulations!</h1>
+    <p id="completionMessage"></p>
+
+    <script>
+        // Retrieve URL parameters (name and time)
+        const urlParams = new URLSearchParams(window.location.search);
+        const userName = urlParams.get('name');
+        const timeTaken = urlParams.get('time');
+
+        // Display completion message
+        document.getElementById('completionMessage').textContent = `${userName}, you completed the quiz in ${timeTaken} seconds.`;
+    </script>
+</body>
+
+</html>

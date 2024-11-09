@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vifaa/Appliances</title>
+    <title>Vifaa/Appliances - Part 2</title>
     <link rel="stylesheet" href="css/jikoni3.css">
 
     <!-- jQuery and jQuery UI CDN Links -->
@@ -63,56 +63,56 @@
 </head>
 
 <body>
-    <h2> LESSON 15:</h2>
-    <h2> Vifaa vya jikoni/Kitchen Appliances</h2>
+    <h2> LESSON 15: Part 2</h2>
+    <h2> Vifaa vya jikoni/Kitchen Appliances - Part 2</h2>
 
     <div class="introduction">
-        <p>Welcome to the Drag and Drop activity! Your task is to match the kitchen appliances with their respective Kiswahili names. Have fun!</p>
+        <p>Welcome to the second part of the Drag and Drop activity! Your task is to match the kitchen utensils with their respective Kiswahili names. Good luck!</p>
         <label for="userName">Enter your name to start the quiz:</label>
         <input type="text" id="userName" placeholder="Your name" />
         <button onclick="startQuiz()">Start Quiz</button>
     </div>
 
     <section class="draggable-elements" id="draggable-container" style="display: none;">
-        <div class="draggable" id="blender" data-match="blender"><img src="img/Jikoni/blender.jpg" alt="Blender"></div>
-        <div class="draggable" id="cooker" data-match="cooker"><img src="img/Jikoni/cooker.jpg" alt="Cooker"></div>
-        <div class="draggable" id="microwave" data-match="microwave"><img src="img/Jikoni/microwave.jpg" alt="Microwave"></div>
-        <div class="draggable" id="fridge" data-match="fridge"><img src="img/Jikoni/fridge.jpg" alt="Fridge"></div>
-        <div class="draggable" id="kettle" data-match="kettle"><img src="img/Jikoni/kettle.jpg" alt="Kettle"></div>
+        <div class="draggable" id="spoon" data-match="spoon"><img src="img/Jikoni/spoon.jpg" alt="Spoon"></div>
+        <div class="draggable" id="fork" data-match="fork"><img src="img/Jikoni/fork.jpg" alt="Fork"></div>
+        <div class="draggable" id="knife" data-match="knife"><img src="img/Jikoni/knife.jpg" alt="Knife"></div>
+        <div class="draggable" id="plate" data-match="plate"><img src="img/Jikoni/plate.jpg" alt="Plate"></div>
+        <div class="draggable" id="cup" data-match="cup"><img src="img/Jikoni/cup.jpg" alt="Cup"></div>
     </section>
 
     <section class="droppable-elements" style="display: flex; justify-content: center; flex-wrap: wrap;">
-        <div class="droppable" data-match="blender">
-            <span>Blenda</span>
+        <div class="droppable" data-match="spoon">
+            <span>Kijiko</span>
         </div>
-        <div class="droppable" data-match="cooker">
-            <span>Jiko la gesi</span>
+        <div class="droppable" data-match="fork">
+            <span>Uma</span>
         </div>
-        <div class="droppable" data-match="microwave">
-            <span>Choko</span>
+        <div class="droppable" data-match="knife">
+            <span>Jicho</span>
         </div>
-        <div class="droppable" data-match="fridge">
-            <span>Jokofu</span>
+        <div class="droppable" data-match="plate">
+            <span>Plate</span>
         </div>
-        <div class="droppable" data-match="kettle">
-            <span>Birika</span>
+        <div class="droppable" data-match="cup">
+            <span>Kikombe</span>
         </div>
     </section>
 
     <div id="timer">Time: 0 seconds</div>
 
-    <div class="completion-message">Congratulations! You've matched all the kitchen appliances!</div>
+    <div class="completion-message">Congratulations! You've matched all the kitchen utensils!</div>
 
     <script>
         // Initialize EmailJS
         emailjs.init("your_user_id"); // Replace with your EmailJS User ID
 
-        const appliances = [
-            { id: "blender", match: "blender", img: "img/Jikoni/blender.jpg" },
-            { id: "cooker", match: "cooker", img: "img/Jikoni/cooker.jpg" },
-            { id: "microwave", match: "microwave", img: "img/Jikoni/microwave.jpg" },
-            { id: "fridge", match: "fridge", img: "img/Jikoni/fridge.jpg" },
-            { id: "kettle", match: "kettle", img: "img/Jikoni/kettle.jpg" },
+        const utensils = [
+            { id: "spoon", match: "spoon", img: "img/Jikoni/spoon.jpg" },
+            { id: "fork", match: "fork", img: "img/Jikoni/fork.jpg" },
+            { id: "knife", match: "knife", img: "img/Jikoni/knife.jpg" },
+            { id: "plate", match: "plate", img: "img/Jikoni/plate.jpg" },
+            { id: "cup", match: "cup", img: "img/Jikoni/cup.jpg" },
         ];
 
         let matchedCount = 0;
@@ -130,25 +130,25 @@
             document.querySelector('.introduction').style.display = 'none';
             document.getElementById('draggable-container').style.display = 'block';
             startTimer();
-            shuffleAppliances();
+            shuffleUtensils();
             createDraggableElements();
         }
 
-        // Shuffle appliances
-        function shuffleAppliances() {
-            appliances.sort(() => Math.random() - 0.5);
+        // Shuffle utensils
+        function shuffleUtensils() {
+            utensils.sort(() => Math.random() - 0.5);
         }
 
         // Populate draggable elements
         function createDraggableElements() {
             const draggableContainer = document.getElementById('draggable-container');
             draggableContainer.innerHTML = '';
-            appliances.forEach(appliance => {
+            utensils.forEach(utensil => {
                 const draggableDiv = document.createElement('div');
                 draggableDiv.className = 'draggable';
-                draggableDiv.id = appliance.id;
-                draggableDiv.setAttribute('data-match', appliance.match);
-                draggableDiv.innerHTML = `<img src="${appliance.img}" alt="${appliance.match}">`;
+                draggableDiv.id = utensil.id;
+                draggableDiv.setAttribute('data-match', utensil.match);
+                draggableDiv.innerHTML = `<img src="${utensil.img}" alt="${utensil.match}">`;
                 draggableContainer.appendChild(draggableDiv);
             });
             setupDraggables();
@@ -227,20 +227,20 @@
             }, 1000);
         }
 
-        // Check completion and send email
+        // Check if the user has completed the quiz
         function checkCompletion() {
-            if (matchedCount === appliances.length) {
+            if (matchedCount === utensils.length) {
                 clearInterval(timerInterval);
                 document.querySelector('.completion-message').style.display = 'block';
-                const timeTaken = Math.floor((Date.now() - startTime) / 1000); // Get time taken in seconds
+                const timeTaken = Math.floor((Date.now() - startTime) / 1000); // Time taken in seconds
                 sendCompletionEmail(userName, timeTaken);
                 setTimeout(() => {
-                    window.location.href = 'jikoni2.html'; // Redirect after completion
+                    window.location.href = 'completion.html'; // Redirect to completion page
                 }, 2000);
             }
         }
 
-        // Send email using EmailJS
+        // Send email with completion details
         function sendCompletionEmail(name, timeTaken) {
             const templateParams = {
                 name: name,
@@ -256,7 +256,6 @@
                 });
         }
     </script>
-
 </body>
 
 </html>
