@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Majengo/Buildings</title>
+    <link rel="stylesheet" href="css/jikoni3.css">
+
+    <!-- jQuery and jQuery UI CDN Links -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+
+<body>
+    <h2> LESSON 15:</h2>
+
+    <h2>Majengo/Buildings </h2>
+
+    <div class="introduction">
+        <p>Welcome to the Drag and Drop activity! Your task is to match the buildings with their respective
+            Kiswahili names. Have fun!</p>
+    </div>
+
+    <section class="draggable-elements" id="draggable-container">
+        <div class="draggable" id="church" data-match="church"><img src="img/church.jpg" alt="Church"></div>
+        <div class="draggable" id="mosque" data-match="mosque"><img src="img/mosque.jpg" alt="Mosque"></div>
+        <div class="draggable" id="school" data-match="school"><img src="img/school.png" alt="School"></div>
+        <div class="draggable" id="bank" data-match="bank"><img src="img/bank.png" alt="Bank"></div>
+        <div class="draggable" id="hotel" data-match="hotel"><img src="img/hotel.jpg" alt="Hotel"></div>
+    </section>
+
+    <section class="droppable-elements" style="display: flex; justify-content: center;">
+        <div class="droppable" data-match="church">
+            <span>Kanisa</span>
+        </div>
+        <div class="droppable" data-match="mosque">
+            <span>Msikiti</span>
+        </div>
+        <div class="droppable" data-match="school">
+            <span>Shule</span>
+        </div>
+        <div class="droppable" data-match="bank">
+            <span>Benki</span>
+        </div>
+        <div class="droppable" data-match="hotel">
+            <span>Hoteli</span>
+        </div>
+    </section>
+
+    <div class="completion-message">Congratulations! You've matched all the Buildings!</div>
+
+    <script src="js/jikoni3.js"></script>
+
+
+</body>
+
+</html>
