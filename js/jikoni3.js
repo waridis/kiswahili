@@ -1,9 +1,9 @@
 const appliances = [
-    { id: "bowl", match: "bowl", img: "img/Jikoni/bowl.jpg" },
-    { id: "knife", match: "knife", img: "img/Jikoni/knife.jpg" },
-    { id: "pot", match: "pot", img: "img/Jikoni/pot.jpg" },
-    { id: "pan", match: "pan", img: "img/Jikoni/pan.jpg" },
-    { id: "spoon", match: "spoon", img: "img/Jikoni/spoon.png" },
+    { id: "church", match: "church", img: "img/church.png" },
+    { id: "mosque", match: "mosque", img: "img/mosque.jpg" },
+    { id: "school", match: "school", img: "img/school.png" },
+    { id: "bank", match: "bank", img: "img/bank.png" },
+    { id: "hotel", match: "hotel", img: "img/hotel.jpg" },
   ];
 
   // Shuffle appliances
@@ -148,7 +148,7 @@ const appliances = [
         document.querySelector('.completion-message').style.display = 'block';
         // Redirect to the next page after a short delay
         setTimeout(() => {
-            window.location.href = 'jikoni.html'; // Change to your next page URL
+            window.location.href = 'completion.html'; // Change to your next page URL
         }, 2000); // 2000 milliseconds = 2 seconds
     }
 }
