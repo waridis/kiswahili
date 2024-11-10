@@ -1,5 +1,5 @@
 const appliances = [
-    { id: "church", match: "church", img: "img/church.png" },
+    { id: "church", match: "church", img: "img/church.jpg" },
     { id: "mosque", match: "mosque", img: "img/mosque.jpg" },
     { id: "school", match: "school", img: "img/school.png" },
     { id: "bank", match: "bank", img: "img/bank.png" },
